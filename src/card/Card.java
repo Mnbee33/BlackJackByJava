@@ -8,4 +8,9 @@ public class Card {
         this.rank = rank;
         this.suite = suite;
     }
+
+    @Override
+    public String toString() {
+        return suite.value() + "の" + rank.rank();
+    }
 }
