@@ -1,5 +1,6 @@
 package card;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,9 +10,15 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeckTest {
+    Deck deck;
+
+    @BeforeEach
+    void setUp() {
+        deck = new Deck();
+    }
+
     @Test
     void testPreparesDeck() {
-        Deck deck = new Deck();
         List<Card> cards = deck.cards;
 
         assertEquals(52, cards.size());
@@ -29,5 +36,21 @@ class DeckTest {
             int size = v.size();
             assertEquals(13, size);
         });
+    }
+
+    // @Test
+    void testShuffle() {
+        deck.shuffle();
+        deck.cards.forEach(System.out::println);
+    }
+
+    @Test
+    void testDraw() {
+        Card card = deck.draw();
+        assertEquals("ハートの2", card.toString());
+        assertEquals(51, deck.cards.size());
+
+        Card nextFirst = deck.cards.get(0);
+        assertEquals("ハートの3", nextFirst.toString());
     }
 }
