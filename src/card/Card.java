@@ -4,7 +4,7 @@ public class Card {
     Suite suite;
     Rank rank;
 
-    Card(Rank rank, Suite suite) {
+    public Card(Rank rank, Suite suite) {
         this.rank = rank;
         this.suite = suite;
     }
@@ -12,5 +12,9 @@ public class Card {
     @Override
     public String toString() {
         return suite.value() + "の" + rank.rank();
+    }
+
+    public Rank getRank(){
+        return rank;
     }
 }
