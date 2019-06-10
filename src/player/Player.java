@@ -30,11 +30,19 @@ public class Player {
                 .sum();
     }
 
-    boolean isBursted() {
+    boolean isBurst() {
         return sumHands() > 21;
     }
 
     int differ() {
         return 21 - sumHands();
+    }
+
+    public String win() {
+        return name + "が勝ちました！";
+    }
+
+    public String showSum() {
+        return name + "の合計は" + sumHands() + "です";
     }
 }

@@ -27,14 +27,6 @@ public class PlayerTest {
     }
 
     @Test
-    void testSumHands() {
-        player.draw(deck);  // 2
-        player.draw(deck);  // 3
-        player.draw(deck);  // 4
-        assertEquals(9, player.sumHands());
-    }
-
-    @Test
     void testBurst() {
         Card[] c = new Card[]{
                 new Card(Rank.TEN, Suite.HEART),
@@ -44,25 +36,39 @@ public class PlayerTest {
         };
         prepareDeck(c);
 
-        player.draw(deck);  // 10
-        player.draw(deck);  // 10
-        player.draw(deck);  // 1
-        assertFalse(player.isBursted());
+        drawTimes(3);   // 21
+        assertFalse(player.isBurst());
 
         player.draw(deck);  // 1
-        assertTrue(player.isBursted());
+        assertTrue(player.isBurst());
     }
 
     @Test
     void testDiffer() {
-        player.draw(deck);  // 2
-        player.draw(deck);  // 3
-        player.draw(deck);  // 4
+        drawTimes(3);
         assertEquals(12, player.differ());
     }
 
-    private void prepareDeck(Card[] c) {
+    @Test
+    void testWin() {
+        assertEquals("あなたが勝ちました！", player.win());
+    }
+
+    @Test
+    void testShowCurrentSum() {
+        drawTimes(3);
+
+        assertEquals("あなたの合計は9です", player.showSum());
+    }
+
+    protected void prepareDeck(Card[] c) {
         List<Card> cards = Arrays.stream(c).collect(Collectors.toList());
         deck = new TestDeck(cards);
+    }
+
+    protected void drawTimes(int times) {
+        for (int i = 0; i < times; i++) {
+            player.draw(deck);
+        }
     }
 }
