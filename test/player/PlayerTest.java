@@ -1,16 +1,16 @@
 package player;
 
-import card.*;
+import card.Card;
+import card.Deck;
+import card.Rank;
+import card.Suite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
+    TestDeckCreator deckCreator = new TestDeckCreator();
     Player player;
     Deck deck;
 
@@ -24,6 +24,19 @@ public class PlayerTest {
     void testDraw() {
         player.draw(deck);
         assertEquals("あなたはハートの2を引きました", player.showHand(0));
+    }
+
+
+    @Test
+    void testShowLast() {
+        player.draw(deck);
+        assertEquals("あなたはハートの2を引きました", player.showLastHand());
+    }
+
+
+    @Test
+    void testDrawAndShow() {
+        assertEquals("あなたはハートの2を引きました", player.drawAndShow(deck));
     }
 
     @Test
@@ -57,13 +70,11 @@ public class PlayerTest {
     @Test
     void testShowCurrentSum() {
         drawTimes(3);
-
         assertEquals("あなたの合計は9です", player.showSum());
     }
 
     protected void prepareDeck(Card[] c) {
-        List<Card> cards = Arrays.stream(c).collect(Collectors.toList());
-        deck = new TestDeck(cards);
+        deck = deckCreator.prepareDeck(c);
     }
 
     protected void drawTimes(int times) {

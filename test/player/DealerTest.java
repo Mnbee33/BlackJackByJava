@@ -12,7 +12,7 @@ public class DealerTest extends PlayerTest {
     Dealer dealer;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         super.setUp();
         dealer = new Dealer();
     }
@@ -33,5 +33,11 @@ public class DealerTest extends PlayerTest {
 
         dealer.autoDraw(deck);
         assertEquals(17, dealer.sumHands());
+    }
+
+    @Test
+    void testDrawAndHide() {
+        assertEquals("ディーラーの1枚目のカードは分かりません", dealer.drawAndHide(deck));
+        assertEquals("ディーラーは1枚目にハートの2を引きました", dealer.showLater(0));
     }
 }
