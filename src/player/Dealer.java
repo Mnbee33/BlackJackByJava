@@ -2,13 +2,11 @@ package player;
 
 import card.Deck;
 
-import java.util.Formatter;
-
 public class Dealer extends Player {
-    Formatter messageFormatter = new Formatter();
     final String MESSAGE_DRAW_LATER = "%sは%d枚目に%sを引きました";
+    final String MESSAGE_HIDE = "%sの%d枚目のカードは分かりません";
 
-    Dealer() {
+    public Dealer() {
         super("ディーラー");
     }
 
@@ -21,12 +19,15 @@ public class Dealer extends Player {
     public String drawAndHide(Deck deck) {
         draw(deck);
         int count = hands.size();
-        return "ディーラーの" + count + "枚目のカードは分かりません";
+        return formatMessage(MESSAGE_HIDE, name, count);
     }
 
     public String showLater(int index) {
         int count = index + 1;
-        Formatter massageText = messageFormatter.format(MESSAGE_DRAW_LATER, name, count, hands.get(index));
-        return massageText.toString();
+        return formatMessage(MESSAGE_DRAW_LATER, name, count, hands.get(index));
+    }
+
+    public boolean isUnder17() {
+        return sumHands() < 17;
     }
 }

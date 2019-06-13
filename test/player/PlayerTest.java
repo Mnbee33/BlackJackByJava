@@ -26,13 +26,11 @@ public class PlayerTest {
         assertEquals("あなたはハートの2を引きました", player.showHand(0));
     }
 
-
     @Test
     void testShowLast() {
         player.draw(deck);
         assertEquals("あなたはハートの2を引きました", player.showLastHand());
     }
-
 
     @Test
     void testDrawAndShow() {
@@ -64,7 +62,7 @@ public class PlayerTest {
 
     @Test
     void testWin() {
-        assertEquals("あなたが勝ちました！", player.win());
+        assertEquals("あなたの勝利です！", player.win());
     }
 
     @Test

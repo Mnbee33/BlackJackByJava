@@ -11,13 +11,12 @@ import java.util.List;
 public class Player {
     String name;
     List<Card> hands = new ArrayList<>();
-    Formatter messageFormatter = new Formatter();
 
     final String MESSAGE_DRAW = "%sは%sを引きました";
     final String MESSAGE_SUM = "%sの合計は%dです";
-    final String MESSAGE_WIN = "%sが勝ちました！";
+    final String MESSAGE_WIN = "%sの勝利です！";
 
-    Player(String name) {
+    public Player(String name) {
         this.name = name;
     }
 
@@ -26,8 +25,7 @@ public class Player {
     }
 
     String showHand(int index) {
-        Formatter messageText = messageFormatter.format(MESSAGE_DRAW, name, hands.get(index));
-        return messageText.toString();
+        return formatMessage(MESSAGE_DRAW, name, hands.get(index));
     }
 
     String showLastHand() {
@@ -35,7 +33,7 @@ public class Player {
         return showHand(lastIndex);
     }
 
-    String drawAndShow(Deck deck) {
+    public String drawAndShow(Deck deck) {
         draw(deck);
         return showLastHand();
     }
@@ -47,7 +45,7 @@ public class Player {
                 .sum();
     }
 
-    boolean isBurst() {
+    public boolean isBurst() {
         return sumHands() > 21;
     }
 
@@ -55,9 +53,8 @@ public class Player {
         return 21 - sumHands();
     }
 
-    String showSum() {
-        Formatter messageText = messageFormatter.format(MESSAGE_SUM, name, sumHands());
-        return messageText.toString();
+    public String showSum() {
+        return formatMessage(MESSAGE_SUM, name, sumHands());
     }
 
     boolean isWon(Player other) {
@@ -68,8 +65,13 @@ public class Player {
         return differ() == other.differ();
     }
 
-    String win() {
-        Formatter messageText = messageFormatter.format(MESSAGE_WIN, name);
+    public String win() {
+        return formatMessage(MESSAGE_WIN, name);
+    }
+
+    protected String formatMessage(String message, Object... args) {
+        Formatter messageFormatter = new Formatter();
+        Formatter messageText = messageFormatter.format(message, args);
         return messageText.toString();
     }
 }

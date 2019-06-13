@@ -2,12 +2,12 @@ package player;
 
 public class NoWinner extends Player {
 
-    NoWinner() {
+    public NoWinner() {
         super("");
     }
 
     @Override
-    String win() {
+    public String win() {
         return "引き分け！勝者なし";
     }
 }

@@ -6,7 +6,7 @@ import card.Suite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DealerTest extends PlayerTest {
     Dealer dealer;
@@ -33,6 +33,23 @@ public class DealerTest extends PlayerTest {
 
         dealer.autoDraw(deck);
         assertEquals(17, dealer.sumHands());
+    }
+
+    @Test
+    void testIsUnder17(){
+        Card[] c = new Card[]{
+                new Card(Rank.TEN, Suite.HEART),
+                new Card(Rank.SIX, Suite.HEART),
+                new Card(Rank.ACE, Suite.HEART),
+        };
+        prepareDeck(c);
+
+        dealer.draw(deck);
+        dealer.draw(deck);
+        assertTrue(dealer.isUnder17());
+
+        dealer.draw(deck);
+        assertFalse(dealer.isUnder17());
     }
 
     @Test

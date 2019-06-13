@@ -16,6 +16,12 @@ public class Deck {
         }
     }
 
+    public static Deck prepareShuffleDeck() {
+        Deck deck = new Deck();
+        deck.shuffle();
+        return deck;
+    }
+
     public void shuffle() {
         Collections.shuffle(cards);
     }

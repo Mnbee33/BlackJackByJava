@@ -44,6 +44,13 @@ class DeckTest {
         deck.cards.forEach(System.out::println);
     }
 
+
+    // @Test
+    void testShuffleDeck() {
+        deck = Deck.prepareShuffleDeck();
+        deck.cards.forEach(System.out::println);
+    }
+
     @Test
     void testDraw() {
         Card card = deck.draw();
